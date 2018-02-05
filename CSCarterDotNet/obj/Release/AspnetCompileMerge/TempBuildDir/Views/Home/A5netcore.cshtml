@@ -1,0 +1,187 @@
+﻿
+@{
+    ViewBag.Title = ".NET Core with Angular 5";
+    ViewBag.Description = "A simple solution for creating applications which combine the Angular 5 and .NET Core frameworks.  Webpack Hot Module Reload is included.";
+}
+
+<div class="tutorialBackground">
+    <div class="content-wide">
+
+        <div class="col-sm-12">
+            <div class="row" style="padding:10px 0 30px 0;">
+                <h2 class="eclipsetext">Building a Combined .NET Core MVC & Angular 5 Application</h2>
+            </div>
+        </div>
+
+        <div class="col-sm-4 scrollablePearl tutorialLeft ">
+            <div class="row marquis-wide">
+                <div>
+                    <h3 class="marquis-text">Christopher Carter, <span style="font-size:80%">MD</span></h3>
+                    <h5 class="marquis-text">.NET Software Engineer<br />Portland, OR</h5>
+                </div>
+                <div class="marquis-pic-sm">
+                    <img src="~/Content/Images/CSCIcon.jpg" />
+                </div>
+            </div> <!--row-->
+
+            <div class="row asideContent">
+                <h4 class="eclipsetext"><b>Use the Latest from Angular and .NET Together</b></h4>
+                <p>
+                    The .NET Core / Angular template in Visual Studio is terrific! --but, alas, it uses Angular 4.2, predating the significant updates of 4.3 and 5.
+                    <br />I have a passion for best-practices, and I wanted my new project to use the latest conventions.
+                    <br />After looking all over for a method to update .NET Core to use Angular 5, I found a lot of solutions--some with critical typos, and some which wouldn't even compile!
+                </p>
+                <p>
+                    So I struck out on my own, and here is the solution I developed.  I know it looks long...see it scrolling off the page over there...but never fear: it's fairly straightforward, and what's more, it's tested--and works!
+                </p>
+                <p>
+                    Features of this solution include:
+                    <ul>
+                        <li>
+                            It produces a file structure consistent with the Visual Studio way of doing things: with the .sln file in a root folder, and each project in a subfolder.
+                        </li>
+                        <li>
+                            Use of the the CLI tools to instantiate projects (an explicit best practice in Angular).
+                        </li>
+                        <li>
+                            Version control is applied to the root folder.
+                        </li>
+                        <li>
+                            Webpack Hot Module Reload is implemented.  However, because IIS Express, not Webpack Dev Server, serves the application from Visual Studio, the implementation is incomplete:
+                            <br />After each change save, HMR rebuilds the Angular code automatically!--but you must manually reload the page.
+                        </li>
+                    </ul>
+                </p>
+
+                <h4>Prerequisites</h4>
+                <p>
+                    The tools used are:
+                    <ul><li>Visual Studio 2017</li></ul>
+                    and the latest versions of
+                    <ul>
+                        <li>Node.js</li>
+                        <li>NPM</li>
+                        <li>Git</li>
+                        <li>.NET Core CLI</li>
+                        <li>Angular CLI</li>
+                    </ul>
+                    The CLI's were executed in PowerShell.
+                </p>
+            </div>  <!--row-->
+        </div>  <!--column-->
+
+        <div class="col-sm-8 scrollablePearl">
+            <div class="row tutorialContent">
+                <h2>A.	Create the file structure, .NET solution and the Angular 5 project</h2>
+                <h4>1.	Using PowerShell in the directory which will be the <i>parent</i> to your solution folder, create the solution folder: <b>mkdir MyApp</b></h4>
+                <h4>2.	<b>cd MyApp</b></h4>
+                <h4>3.	Add version control: <b>git init</b></h4>
+                <h4>4.	Create the Visual Studio solution: <b>dotnet new sln</b></h4>
+                <h4>5.	Create the Angular project, simultaneously creating the project folder: <b>ng new MyApp –skip-git</b></h4>
+                <h5>If not prevented by <b>–skip-git</b>, Angular CLI puts this folder under version control</h5>
+                <h4>6.	<b>cd MyApp</b> (now you are in <b>MyApp/MyApp</b>)</h4>
+                <h2>B. Configure the Angular 5 application to use Webpack</h2>
+                <h4>1.	Convert from Angular CLI-style to Webpack-style application: <b>ng eject</b></h4>
+                <h5>Fom now on, as noted by the shell response, you must use the npm commands in place of the angular cli commands:</h5>
+                <h6><b>&bull;npm run build</b> to build</h6>
+                <h6><b>&bull;npm test</b> to run unit tests</h6>
+                <h6><b>&bull;npm start</b> to serve the app using webpack-dev-server</h6>
+                <h6><b>&bull;npm run e2e</b> to run protractor (end-to-end testing)</h6>
+                <h4>2.	Install Webpack which was added to the manifest in the last step: <b>npm install</b></h4>
+                <h4>3.	Install Webpack extension module: <b>npm install aspnet-webpack --save-dev</b></h4>
+                <h4>4.	Install Webpack extension module: <b>npm install webpack-hot-middleware --save-dev</b></h4>
+                <h2>C. Initialize the .NET Core MVC project</h2>
+                <h4>1.	<b>dotnet new mvc</b></h4>
+                <h2>D.	Configure the solution</h2>
+                <h4>1.	Open the solution in Visual Studio</h4>
+                <h4>2.	Right-click on the solution,and <b>Add / Existing Project</b>: MyApp.csproj</h4>
+                <h5>At this point, you have a working chimera: running in Visual Studio and <b>npm start</b> would both work, each serving a different application.</h5>
+                <h2>E.	Configure the .Net Core project to use Angular and Webpack</h2>
+                <h4>1.	add the NuGet package <b>Microsoft.AspNetCore.SpaServices</b></h4>
+                <h4>2.	To <b>Startup.cs</b>, add <code class="inlineCode">using Microsoft.AspNetCore.SpaServices.Webpack;</code></h4>
+                <h4>3.	Add two sections to the <b>Configure</b> method of <b>Startup.cs</b>:</h4>
+                <code>
+                    <pre>
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+{
+    if (env.IsDevelopment())
+    {
+        app.UseDeveloperExceptionPage();
+                    <b>app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+        {
+            HotModuleReplacement = true
+        });</b>
+    }
+    else
+    {
+        app.UseExceptionHandler("/Home/Error");
+    }
+
+    app.UseStaticFiles();
+
+    app.UseMvc(routes =>
+    {
+        routes.MapRoute(
+                name: "default",
+                template: "{controller=Home}/{action=Index}/{id?}");
+
+                    <b>
+        routes.MapSpaFallbackRoute(
+                name: "spa-fallback",
+                defaults: new { controller = "Home", action = "Index" });
+    </b>
+    });
+}
+                 </pre>
+                </code>
+                <h2>F. Tie Angular 5 and .Net Core together</h2>
+                <h4>1.	Alter the output target in <b>webpack.config.json</b>:</h4>
+                <code>
+                    <pre>
+output": {
+    "path": path.join(process.cwd(), "<b>wwwroot/dist</b>"),
+                    <b>"publicPath": "dist/",</b>
+    "filename": "[name].bundle.js",
+    "chunkFilename": "[id].chunk.js",
+    "crossOriginLoading": false
+},
+                 </pre>
+                </code>
+                <h5>If a <b>dist</b> folder exists at this time (it shouldn’t, unless you did a build), you can delete it.  Builds will now create <b>dist</b> in the location specified above.</h5>
+                <h4>2.	Replace the content of <b>Views/Home/Index.cshtml</b> with a target for Angular:</h4>
+                <code>
+                    <pre>
+&#64;{
+ViewData["Title"] = "Home Page";
+}
+
+&lt;app-root>...Loading&lt;/app-root>
+&lt;script type="text/javascript" src="~/dist/inline.bundle.js">&lt;/script>
+&lt;script type="text/javascript" src="~/dist/polyfills.bundle.js">&lt;/script>
+&lt;script type="text/javascript" src="~/dist/styles.bundle.js">&lt;/script>
+&lt;script type="text/javascript" src="~/dist/vendor.bundle.js">&lt;/script>
+&lt;script type="text/javascript" src="~/dist/main.bundle.js">&lt;/script>
+                 </pre>
+                </code>
+                <h2>G. Finish Up</h2>
+                <h4>1.	In PowerShell, within the <b>MyApp/MyApp</b> folder, <b>npm run build</b></h4>
+                <h5>At this point, the Angular and MVC sides of the application are merged: the Angular components will appear in the Index view.  <b>Congratulations!</b></h5>
+                <h4>2.	Run in Visual Studio</h4>
+                <br />
+                <br />
+
+
+            </div>  <!--row-->
+        </div>  <!--column-->
+    </div> <!--content-->
+</div> <!--background-->
+
+
+<script>
+    var elems = document.querySelectorAll(".navlink");
+    [].forEach.call(elems, function (el) {
+        el.classList.add("inactive");
+    });
+
+    document.getElementById('pearllink').classList.remove('inactive');
+</script>

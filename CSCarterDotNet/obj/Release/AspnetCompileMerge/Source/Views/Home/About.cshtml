@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "Chris Carter: About Me";
+    ViewBag.Description = "A little bit about me, why I code, and what I do otherwise.";
+}
+
+<div class="aboutBackground">
+    <div class="content">
+
+            <div class="col-md-5 scrollableAbout">
+                <div class="row marquis-wide">
+                    <div>
+                        <h3 class="marquis-text">Christopher Carter, <span style="font-size:80%">MD</span></h3>
+                        <h5 class="marquis-text">.NET Software Engineer<br />Portland, OR</h5>
+                    </div>
+                    <div class="marquis-pic-sm">
+                        <img src="~/Content/Images/CSCIcon.jpg" />
+                    </div>
+                </div> <!--row-->
+                <div class="row aboutme">
+                    <p>I enjoy the entire breadth of developing--the challenges of the back-end, the creativity and detail-orientation of the user interface, and the collaboration involved in building the business logic in-between.  My passion is writing readable, maintainable, and testable code.  One of the most satisfying aspects of developing software, for me, is when I can build an application which not only supports a business process,  but allows that process to be enhanced because of the new tool capabilities.</p>
+                    <p>While a researcher at Lewis and Clark College, I spent several years doing scientific modeling of physical systems. Later, in the Medical field, I designed and maintained databases to support our daily practice, and data analysis/visualization tools for quality-improvement.  These roots in scientific data analysis and visualization have fostered an interest in Python and its amazing libraries.</p>
+                    <p>Most of my experience, however, has been in .NET, developing Web- and Windows-based applications using both C# and Visual Basic. This experience has included many supporting technologies, including:</p>
+                    <div style="display:flex; flex-flow:row nowrap; align-items:center; justify-content:center;">
+                        <ul>
+                            <li>MVC</li>
+                            <li>Entity Framework</li>
+                            <li>Angular</li>
+                        </ul>
+                        <ul>
+                            <li>React</li>
+                            <li>JavaScript & jQuery</li>
+                            <li>Bootstrap</li>
+                        </ul>
+                        <ul>
+                            <li>nLog</li>
+                            <li>Ninject & Unity</li>
+                            <li>xUnit & Moq.</li>
+                        </ul>
+                    </div>
+                    </p>
+                    <p>When I'm not coding, I enjoy the good living of the Willamette Valley!  Excellent food, crisp ales and luxurious wines...  Come hike the Gorge, climb Mount Hood, or explore the Coast!  I am an instrument-rated pilot, and I fly whenever I can.  For a little more down-to-earth fun, I explore the area by bicycle.</p>
+                </div>
+            </div>  <!--column 1-->
+
+            <div class="col-md-3 col-md-offset-1">
+                <div class="row depictme">
+                    <img src="~/Content/Images/concentration.jpg" />
+                </div>
+                <div class="row depictme">
+                    <img src="~/Content/Images/Cooper Mtn 01.jpg" />
+                </div>
+                <div class="row depictme">
+                    <img src="~/Content/Images/1.bmp" />
+                </div>
+                <div class="row depictme">
+                    <img src="~/Content/Images/climbing.jpg" />
+                </div>
+            </div>  <!--column 2-->
+
+            <div class="col-md-1">
+                <div class="row">
+                    <a class="btn textlink" href="/Home/Index">
+                        <span class="textlink-main">Home</span>
+                        <br />
+                        <span class="textlink-sub">Return to main page</span>
+                    </a>
+                </div>
+                <div class="row">
+                    <a class="btn textlink" href="/Home/Portfolio">
+                        <span class="textlink-main">Portfolio</span>
+                        <br />
+                        <span class="textlink-sub">A few of my projects</span>
+                    </a>
+                </div>
+                <div class="row">
+                    <a class="btn textlink" href="/Home/A5netcore">
+                        <span class="textlink-main">Pearls</span>
+                        <br />
+                        <span class="textlink-sub">...of wisdom</span>
+                    </a>
+                </div>
+                <div class="row">
+                    <a class="btn textlink" href="/Home/Contact">
+                        <span class="textlink-main">Contact</span>
+                        <br />
+                        <span class="textlink-sub">I'd love to talk with you!</span>
+                    </a>
+                </div>
+            </div>  <!--column 3-->
+
+    </div> <!--content-->
+</div> <!--background-->
+
+
+<script>
+    var elems = document.querySelectorAll(".navlink");
+    [].forEach.call(elems, function (el) {
+        el.classList.add("inactive");
+    });
+
+    document.getElementById('aboutlink').classList.remove('inactive');
+</script>

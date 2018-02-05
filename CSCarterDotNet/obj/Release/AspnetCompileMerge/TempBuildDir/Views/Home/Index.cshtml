@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Christopher Carter";
+    ViewBag.Description = "Christopher Carter, MD is a full-stack .NET software engineer in Portland, Oregon.  His passions include developing software using best practices, and flying.";
+}
+
+<div class="indexBackground">
+    <div class="content">
+        <div class="col-md-4">
+            <div class="row marquis">
+                <h1 class="marquis-text">Christopher Carter, <span style="font-size:80%">MD</span></h1>
+                <div class="marquis-pic">
+                    <img src="~/Content/Images/CSCIcon.jpg" />
+                </div>
+                <h2 class="marquis-text">.NET Software Engineer<br />Portland, OR</h2>
+                <div class="certifications">
+                    <img src="~/Content/Images/Special_ProgHTML5_Blk.png" />
+                    <img src="~/Content/Images/MS_Cert_Professional_logo_Blk_rgb.png" />
+                </div>
+            </div> <!--row-->
+        </div>  <!--column 1-->
+
+        <div class="col-md-4">
+            <div class="row">
+                <a class="btn textlink" href="/Home/About">
+                    <span class="textlink-main">About Me</span>
+                    <br />
+                    <span class="textlink-sub">A few things about me.</span>
+                </a>
+            </div>
+            <div class="row">
+                <a class="btn textlink" href="/Home/Portfolio">
+                    <span class="textlink-main">Portfolio</span>
+                    <br />
+                    <span class="textlink-sub">A few of my projects.</span>
+                </a>
+            </div>
+            <div class="row">
+                <a class="btn textlink" href="/Home/A5netcore">
+                    <span class="textlink-main">Pearls of Wisdom</span>
+                    <br />
+                    <span class="textlink-sub">A repository for litle pearls of coding wisdom.</span>
+                </a>
+            </div>
+            <div class="row">
+                <a class="btn textlink" href="/Home/Contact">
+                    <span class="textlink-main">Contact</span>
+                    <br />
+                    <span class="textlink-sub">I'd love to talk with you!</span>
+                </a>
+            </div> <!--row-->
+        </div>  <!--column 2-->
+
+        <div class="col-md-4">
+            <div class="row">
+                <ul class="execsumm">
+                    <li>Full-Stack .NET Developer in C# and VB.</li>
+                    <li>SQL Server Database Design & Development.</li>
+                    <li>Data Analysis and Visualization</li>
+                </ul>
+            </div> <!--row-->
+        </div>  <!--column 3-->
+    </div> <!--content-->
+</div> <!--background-->
+
+
+<script>
+    var elems = document.querySelectorAll(".navlink");
+    [].forEach.call(elems, function (el) {
+        el.classList.add("inactive");
+    });
+
+    document.getElementById('homelink').classList.remove('inactive');
+</script>

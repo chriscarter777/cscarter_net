@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Contact Chris";
+    ViewBag.Description = "Contact information for Christopher Carter, a .NET software engineer in Portland, Oregon.";
+}
+
+<div class="contactBackground">
+    <div class="content">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row marquis">
+                    <h1 class="marquis-text">Christopher Carter, <span style="font-size:80%">MD</span></h1>
+                    <div class="marquis-pic">
+                        <img src="~/Content/Images/CSCIcon.jpg" />
+                    </div>
+                    <h2 class="marquis-text">.NET Software Engineer<br />Portland, OR</h2>
+                    <div class="certifications">
+                        <img src="~/Content/Images/Special_ProgHTML5_Blk.png" />
+                        <img src="~/Content/Images/MS_Cert_Professional_logo_Blk_rgb.png" />
+                    </div>
+                </div>  <!--row-->
+            </div>  <!--column 1-->
+
+            <div class="col-md-5 contactlinks">
+                <div class="row">
+                    <a class="btn contactlink" href="mailto:christopher.carter.777@gmail.com">
+                        <span class="contactlink-main">Email</span>
+                        <br />
+                        <span class="contactlink-sub">christopher.carter.777@gmail.com</span>
+                    </a>
+                </div>
+                <div class="row">
+                    <a class="btn contactlink" href="https://www.linkedin.com/in/chriscarter777">
+                        <span class="contactlink-main">LinkedIn</span>
+                        <br />
+                        <span class="contactlink-sub">linkedin.com/in/chriscarter777</span>
+                    </a>
+                </div>
+                <div class="row">
+                    <a class="btn contactlink" href="https://github.com/chriscarter777">
+                        <span class="contactlink-main">GitHub</span>
+                        <br />
+                        <span class="contactlink-sub">chriscarter777.github.io</span>
+                    </a>
+                </div>
+            </div>  <!--column 2-->
+
+         </div> <!--row-->
+    </div> <!--content-->
+</div> <!--background-->
+
+
+<script>
+    var elems = document.querySelectorAll(".navlink");
+    [].forEach.call(elems, function (el) {
+        el.classList.add("inactive");
+    });
+
+    document.getElementById('contactlink').classList.remove('inactive');
+</script>
